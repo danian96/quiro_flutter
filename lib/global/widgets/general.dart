@@ -1,3 +1,4 @@
+import 'package:consultorio_quiropractico/data/model/consultorio_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,6 +46,27 @@ Widget botonGeneralRedirect(BuildContext context, String text, String route,
     child: RaisedButton(
       onPressed: () {
         Get.toNamed(route);
+      },
+      color: colorBoton,
+      textColor: colorLetras,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 20.0),
+      ),
+    ),
+  );
+}
+
+Widget botonGeneralRedirect2(BuildContext context, Consultorio consultorio,
+    String text, String route, Color colorBoton, Color colorLetras) {
+  return Container(
+    width: 300,
+    height: 60,
+    child: RaisedButton(
+      onPressed: () {
+        Get.toNamed(route, arguments: consultorio);
       },
       color: colorBoton,
       textColor: colorLetras,

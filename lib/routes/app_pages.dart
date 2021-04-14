@@ -1,5 +1,7 @@
 import 'package:consultorio_quiropractico/bindings/cita_binding.dart';
 import 'package:consultorio_quiropractico/bindings/login_binding.dart';
+import 'package:consultorio_quiropractico/views/agendar_cita_f_view.dart';
+import 'package:consultorio_quiropractico/views/agendar_cita_view.dart';
 import 'package:consultorio_quiropractico/views/citas_view.dart';
 import 'package:consultorio_quiropractico/views/editar_cita_view.dart';
 import 'package:consultorio_quiropractico/views/login_view.dart';
@@ -17,6 +19,14 @@ class AppPages {
     GetPage(
         name: Routes.EDITAR_CITA,
         page: () => EditarCitaView(),
+        binding: CitaBinding()),
+    GetPage(
+        name: Routes.AGENDAR,
+        page: () => AgendarCitaView(),
+        binding: CitaBinding()),
+    GetPage(
+        name: Routes.AGENDAR_CITA,
+        page: () => AgendarCitaFView(),
         binding: CitaBinding()),
   ];
 }

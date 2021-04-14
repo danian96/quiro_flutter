@@ -22,15 +22,15 @@ class Consultorio {
       this.apellido_materno_quiro);
 
   Consultorio.fromJson(Map<String, dynamic> json)
-      : nombre = json['nombre'],
-        id_consultorio = json['id_consultorio'],
-        telefono = json['telefono'],
-        ubicacion = json['ubicacion'],
-        email = json['email'],
-        id_quiro = json['id_quiro'],
-        nombre_quiro = json['nom'],
-        apellido_paterno_quiro = json['Ap_paterno'],
-        apellido_materno_quiro = json['Ap_materno'];
+      : nombre = json['nombre'].toString(),
+        id_consultorio = json['id_consultorio'].toString(),
+        telefono = json['telefono'].toString(),
+        ubicacion = json['ubicacion'].toString(),
+        email = json['email'].toString(),
+        id_quiro = json['id_quiro'].toString(),
+        nombre_quiro = json['nom'].toString(),
+        apellido_paterno_quiro = json['Ap_paterno'].toString(),
+        apellido_materno_quiro = json['Ap_materno'].toString();
 
   Map<String, dynamic> toJson() => {
         'nombre': nombre,

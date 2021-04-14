@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:consultorio_quiropractico/global/constants.dart';
 
 class ConsultorioApiClient extends GetConnect {
   getAll() async {
-    var response = await get("http://localhost:8000/api/consultorios");
+    var response = await post(baseUrl + "/consultorios", {});
 
     if (response.hasError) {
       Get.defaultDialog(

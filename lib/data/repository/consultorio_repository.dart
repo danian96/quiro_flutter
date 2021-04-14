@@ -10,7 +10,7 @@ class ConsultorioRepository {
     var response = await apiClient.getAll();
     if (response != null) {
       response.forEach((e) {
-        print(Consultorio.fromJson(e).toJson());
+        //print(Consultorio.fromJson(e).toJson());
         list.add(Consultorio.fromJson(e));
       });
     }

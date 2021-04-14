@@ -70,7 +70,7 @@ class Page1 extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold)),
                             onPressed: () {
-                              Get.toNamed(Routes.EDITAR_CITA);
+                              Get.toNamed(Routes.EDITAR_CITA, arguments: cita);
                             },
                           ),
                           Obx(

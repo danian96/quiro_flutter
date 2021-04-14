@@ -41,7 +41,7 @@ class HomePage extends GetView<HomeController> {
           botonGeneralRedirect(context, "Iniciar Sesion", Routes.LOGIN,
               Colors.white, Colors.black),
           espacio(25),
-          botonGeneralRedirect(context, "Agendar Cita", Routes.LOGIN,
+          botonGeneralRedirect(context, "Agendar Cita", Routes.AGENDAR,
               Colors.white, Colors.black),
           espacio(15),
           informacion(context),

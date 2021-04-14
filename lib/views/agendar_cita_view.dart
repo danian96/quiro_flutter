@@ -1,135 +1,95 @@
-// import 'package:consultorio_quiropractico/global/constants.dart';
-// import 'package:consultorio_quiropractico/controllers/cita_controller.dart';
+import 'package:consultorio_quiropractico/data/model/consultorio_model.dart';
+import 'package:consultorio_quiropractico/global/constants.dart';
+import 'package:consultorio_quiropractico/controllers/cita_controller.dart';
+import 'package:consultorio_quiropractico/global/widgets/general.dart';
+import 'package:consultorio_quiropractico/routes/app_routes.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-// class AgendarCitaView extends GetView<CitaController> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Agendar Atendimento'),
-//         centerTitle: true,
-//         actions: [
-//           IconButton(
-//             icon: Icon(Icons.check),
-//             onPressed: controller.onsave,
-//           ),
-//         ],
-//       ),
-//       body: Form(
-//         key: controller.formKey,
-//         child: ListView(
-//           padding: EdgeInsets.all(10),
-//           children: <Widget>[
-//             Padding(
-//               padding: const EdgeInsets.all(10.0),
-//               child: Card(
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: <Widget>[
-//                     ListTile(
-//                       title: Text('${controller.service.name}',
-//                           style: TextStyle(fontSize: 20)),
-//                       subtitle: Text('${controller.service.description}'),
-//                     ),
-//                     Divider(color: Colors.black),
-//                     ListTile(
-//                       title: Text('Preço'),
-//                       trailing: Text(
-//                         "R\$ ${formatcurrency.format(controller.service.cost)}",
-//                         style: TextStyle(
-//                             fontWeight: FontWeight.bold, color: Colors.red),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: EdgeInsets.all(8.0),
-//               child: TextFormField(
-//                 controller: controller.dateController,
-//                 showCursor: true,
-//                 readOnly: true,
-//                 decoration: InputDecoration(
-//                   labelText: 'Data Prevista',
-//                   icon: Icon(Icons.today),
-//                 ),
-//                 onTap: controller.openCalendar,
-//                 validator: (value) {
-//                   if (value.isEmpty) {
-//                     return 'Campo requerido.';
-//                   }
-//                   return null;
-//                 },
-//               ),
-//             ),
-//             Padding(
-//               padding: EdgeInsets.all(8.0),
-//               child: TextFormField(
-//                 controller: controller.timeController,
-//                 showCursor: true,
-//                 readOnly: true,
-//                 decoration: InputDecoration(
-//                   labelText: 'Hora Prevista',
-//                   icon: Icon(Icons.access_time),
-//                 ),
-//                 onTap: controller.openClock,
-//                 validator: (value) {
-//                   if (value.isEmpty) {
-//                     return 'Campo requerido.';
-//                   }
-//                   return null;
-//                 },
-//               ),
-//             ),
-//             Container(
-//               padding: EdgeInsets.symmetric(vertical: 15),
-//               child: Center(
-//                 child: Obx(() => Text(
-//                       'Escolha o intervalo que deseja ser atendido. \n\nInício: ${controller.start.value.toStringAsFixed(0)}h    Término: ${controller.end.value.toStringAsFixed(0)}h',
-//                       textAlign: TextAlign.center,
-//                     )),
-//               ),
-//             ),
-//             Obx(
-//               () => RangeSlider(
-//                 divisions: 13,
-//                 activeColor: Colors.red[700],
-//                 inactiveColor: Colors.red[300],
-//                 min: 7,
-//                 max: 20,
-//                 values:
-//                     RangeValues(controller.start.value, controller.end.value),
-//                 labels: RangeLabels(
-//                     '${controller.start.value.toStringAsFixed(0)}h',
-//                     '${controller.end.value.toStringAsFixed(0)}h'),
-//                 onChanged: (value) {
-//                   print("START: ${value.start}, End: ${value.end}");
-//                   controller.start.value = value.start;
-//                   controller.end.value = value.end;
-//                   //controller.values = value;
-//                   //controller.labels = RangeLabels("${value.start.toInt().toStringAsFixed(0)}h\$", "${value.start.toInt().toStringAsFixed(0)}h\$");
-//                 },
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: TextFormField(
-//                 showCursor: true,
-//                 readOnly: true,
-//                 decoration: InputDecoration(
-//                   labelText: 'Escolha um Funcionário (Opcional)',
-//                   icon: Icon(Icons.account_circle),
-//                 ),
-//                 onTap: controller.openEmployeePage,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class AgendarCitaView extends GetView<CitaController> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Agendar Cita'),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: SizedBox.expand(
+          child: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: todo(context),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget todo(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Obx(
+              () => ListView.builder(
+                itemCount: controller.listaDeConsultorios.length,
+                itemBuilder: (context, index) {
+                  Consultorio consultorio =
+                      controller.listaDeConsultorios[index];
+                  String quiropractico = consultorio.nombre_quiro +
+                      " " +
+                      consultorio.apellido_paterno_quiro +
+                      " " +
+                      consultorio.apellido_paterno_quiro;
+                  return instalaciones(
+                      context,
+                      consultorio.nombre,
+                      quiropractico,
+                      consultorio.telefono,
+                      consultorio.ubicacion,
+                      consultorio.email);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget instalaciones(BuildContext context, String nombre,
+      String quiropractico, String telefono, String ubicacion, String correo) {
+    return Container(
+      width: 260,
+      height: 360,
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: Column(
+        children: <Widget>[
+          negritaText(
+              nombre, Colors.black, FontStyle.normal, 22, TextAlign.left),
+          generalText(quiropractico, Colors.black, FontStyle.normal, 20,
+              TextAlign.center),
+          generalText(
+              telefono, Colors.black, FontStyle.normal, 18, TextAlign.left),
+          generalText(
+              ubicacion, Colors.black, FontStyle.normal, 18, TextAlign.left),
+          generalText(
+              correo, Colors.black, FontStyle.normal, 18, TextAlign.left),
+          espacio(10),
+          botonGeneralRedirect(context, "Agendar cita", Routes.AGENDAR_CITA,
+              Colors.amber, Colors.black)
+        ],
+      ),
+    );
+  }
+}

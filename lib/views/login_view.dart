@@ -3,7 +3,6 @@ import 'package:consultorio_quiropractico/global/widgets/general.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:consultorio_quiropractico/global/widgets//background.dart';
 import 'package:consultorio_quiropractico/global/widgets/rounded_button.dart';
 import 'package:consultorio_quiropractico/global/widgets/rounded_input_field.dart';

@@ -26,4 +26,22 @@ class CitaRepository {
     }
     return response;
   }
+
+  edit(id_cita, fecha, hora) async {
+    var response = await apiClient.edit(id_cita, fecha, hora);
+    if (response != null) {
+      print(response.body);
+    }
+    return response;
+  }
+
+  insertar(nombre, ap_paterno, ap_materno, edad, email, sexo, telefono,
+      fecha_cita, hora) async {
+    var response = await apiClient.insertar(nombre, ap_paterno, ap_materno,
+        edad, email, sexo, telefono, fecha_cita, hora);
+    if (response != null) {
+      print(response);
+    }
+    return response;
+  }
 }
